@@ -4,9 +4,9 @@ namespace Microscrap\Bindings\GPIO\Enums;
 
 enum LineBias: int
 {
-    case AsIs = 1;
-    case Unknown = 2;
-    case Disabled = 3;
-    case PullUp = 4;
-    case PullDown = 5;
+    case AS_IS = 1;
+    case UNKNOWN = 2;
+    case DISABLED = 3;
+    case PULL_UP = 4;
+    case PULL_DOWN = 5;
 }

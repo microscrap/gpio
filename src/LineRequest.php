@@ -116,8 +116,8 @@ class LineRequest
         $values = [];
         foreach ($indices as $index) {
             $values[] = static::isMaskBitSet($result->bits, $index)
-                ? LineValue::Active
-                : LineValue::Inactive;
+                ? LineValue::ACTIVE
+                : LineValue::INACTIVE;
         }
 
         return $values;
@@ -162,7 +162,7 @@ class LineRequest
             $resolved = $values[$index] instanceof LineValue
                 ? $values[$index]
                 : LineValue::tryFrom($values[$index]);
-            if (! $resolved instanceof LineValue || $resolved === LineValue::Error) {
+            if (! $resolved instanceof LineValue || $resolved === LineValue::ERROR) {
                 return -1;
             }
 
@@ -172,7 +172,7 @@ class LineRequest
             }
 
             $uapi->mask = static::assignMaskBit($uapi->mask, $line_index, true);
-            $uapi->bits = static::assignMaskBit($uapi->bits, $line_index, $resolved === LineValue::Active);
+            $uapi->bits = static::assignMaskBit($uapi->bits, $line_index, $resolved === LineValue::ACTIVE);
         }
 
         $buffer = $uapi->toBuffer();

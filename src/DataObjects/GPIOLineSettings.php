@@ -14,12 +14,12 @@ use Microscrap\Bindings\GPIO\Enums\LineValue;
  */
 class GPIOLineSettings
 {
-    public LineDirection $direction = LineDirection::AsIs;
-    public LineEdge $edge_detection = LineEdge::None;
-    public LineDrive $drive = LineDrive::PushPull;
-    public LineBias $bias = LineBias::AsIs;
+    public LineDirection $direction = LineDirection::AS_IS;
+    public LineEdge $edge_detection = LineEdge::NONE;
+    public LineDrive $drive = LineDrive::PUSH_PULL;
+    public LineBias $bias = LineBias::AS_IS;
     public bool $active_low = false;
-    public LineClock $event_clock = LineClock::Monotonic;
+    public LineClock $event_clock = LineClock::MONOTONIC;
     public int $debounce_period_us = 0;
-    public LineValue $output_value = LineValue::Inactive;
+    public LineValue $output_value = LineValue::INACTIVE;
 }

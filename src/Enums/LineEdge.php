@@ -4,8 +4,8 @@ namespace Microscrap\Bindings\GPIO\Enums;
 
 enum LineEdge: int
 {
-    case None = 1;
-    case Rising = 2;
-    case Falling = 3;
-    case Both = 4;
+    case NONE = 1;
+    case RISING = 2;
+    case FALLING = 3;
+    case BOTH = 4;
 }

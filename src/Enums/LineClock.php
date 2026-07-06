@@ -4,7 +4,7 @@ namespace Microscrap\Bindings\GPIO\Enums;
 
 enum LineClock: int
 {
-    case Monotonic = 1;
-    case Realtime = 2;
-    case Hte = 3;
+    case MONOTONIC = 1;
+    case REALTIME = 2;
+    case HTE = 3;
 }

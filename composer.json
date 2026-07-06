@@ -2,7 +2,7 @@
     "name": "microscrap/gpio",
     "description": "Unix gpiod Bindings for The PHP Posi Extension",
     "type": "library",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "keywords": ["framework", "scrapyard-io"],
     "license": "MIT",
     "homepage": "https://dosr.projectsaturnstudios.com",
@@ -15,7 +15,7 @@
     "require": {
         "php": "^8.3",
         "ext-posi": "^0.4.0",
-        "microscrap/posix": "^0.4.0"
+        "microscrap/posix": "^0.5.0"
     },
     "autoload": {
         "psr-4": {

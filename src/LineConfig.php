@@ -34,7 +34,7 @@ class LineConfig
         for ($index = 0; $index < 64; $index++) { // GPIO_V2_LINES_MAX
             $config->line_configs[$index]->offset = 0;
             $config->line_configs[$index]->node = null;
-            $config->output_values[$index] = LineValue::Inactive;
+            $config->output_values[$index] = LineValue::INACTIVE;
         }
     }
 
@@ -136,7 +136,7 @@ class LineConfig
 
         foreach ($normalized as $index => $value) {
             $resolved = $value instanceof LineValue ? $value : LineValue::tryFrom($value);
-            if (! $resolved instanceof LineValue || $resolved === LineValue::Error) {
+            if (! $resolved instanceof LineValue || $resolved === LineValue::ERROR) {
                 $config->num_output_values = 0;
 
                 return -1;
@@ -257,7 +257,7 @@ class LineConfig
                 continue;
             }
 
-            if (gpiod_line_settings_get_direction($settings) === LineDirection::Output) {
+            if (gpiod_line_settings_get_direction($settings) === LineDirection::OUTPUT) {
                 return true;
             }
         }
@@ -276,7 +276,7 @@ class LineConfig
                 continue;
             }
 
-            if (gpiod_line_settings_get_direction($settings) !== LineDirection::Output) {
+            if (gpiod_line_settings_get_direction($settings) !== LineDirection::OUTPUT) {
                 continue;
             }
 
@@ -284,7 +284,7 @@ class LineConfig
             $values = static::assignMaskBit(
                 $values,
                 $index,
-                gpiod_line_settings_get_output_value($settings) === LineValue::Active,
+                gpiod_line_settings_get_output_value($settings) === LineValue::ACTIVE,
             );
         }
 
@@ -293,7 +293,7 @@ class LineConfig
             $values = static::assignMaskBit(
                 $values,
                 $index,
-                $config->output_values[$index] === LineValue::Active,
+                $config->output_values[$index] === LineValue::ACTIVE,
             );
         }
 
@@ -427,10 +427,10 @@ class LineConfig
         $flags = 0;
 
         switch (gpiod_line_settings_get_direction($settings)) {
-            case LineDirection::Input:
+            case LineDirection::INPUT:
                 $flags |= GPIOV2LineFlag::INPUT->value;
                 break;
-            case LineDirection::Output:
+            case LineDirection::OUTPUT:
                 $flags |= GPIOV2LineFlag::OUTPUT->value;
                 break;
             default:
@@ -438,13 +438,13 @@ class LineConfig
         }
 
         switch (gpiod_line_settings_get_edge_detection($settings)) {
-            case LineEdge::Falling:
+            case LineEdge::FALLING:
                 $flags |= GPIOV2LineFlag::EDGE_FALLING->value | GPIOV2LineFlag::INPUT->value;
                 break;
-            case LineEdge::Rising:
+            case LineEdge::RISING:
                 $flags |= GPIOV2LineFlag::EDGE_RISING->value | GPIOV2LineFlag::INPUT->value;
                 break;
-            case LineEdge::Both:
+            case LineEdge::BOTH:
                 $flags |= GPIOV2LineFlag::EDGE_FALLING->value
                     | GPIOV2LineFlag::EDGE_RISING->value
                     | GPIOV2LineFlag::INPUT->value;
@@ -454,10 +454,10 @@ class LineConfig
         }
 
         switch (gpiod_line_settings_get_drive($settings)) {
-            case LineDrive::OpenDrain:
+            case LineDrive::OPEN_DRAIN:
                 $flags |= GPIOV2LineFlag::OPEN_DRAIN->value;
                 break;
-            case LineDrive::OpenSource:
+            case LineDrive::OPEN_SOURCE:
                 $flags |= GPIOV2LineFlag::OPEN_SOURCE->value;
                 break;
             default:
@@ -465,13 +465,13 @@ class LineConfig
         }
 
         switch (gpiod_line_settings_get_bias($settings)) {
-            case LineBias::Disabled:
+            case LineBias::DISABLED:
                 $flags |= GPIOV2LineFlag::BIAS_DISABLED->value;
                 break;
-            case LineBias::PullUp:
+            case LineBias::PULL_UP:
                 $flags |= GPIOV2LineFlag::BIAS_PULL_UP->value;
                 break;
-            case LineBias::PullDown:
+            case LineBias::PULL_DOWN:
                 $flags |= GPIOV2LineFlag::BIAS_PULL_DOWN->value;
                 break;
             default:
@@ -483,10 +483,10 @@ class LineConfig
         }
 
         switch (gpiod_line_settings_get_event_clock($settings)) {
-            case LineClock::Realtime:
+            case LineClock::REALTIME:
                 $flags |= GPIOV2LineFlag::EVENT_CLOCK_REALTIME->value;
                 break;
-            case LineClock::Hte:
+            case LineClock::HTE:
                 $flags |= GPIOV2LineFlag::EVENT_CLOCK_HTE->value;
                 break;
             default:

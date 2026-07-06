@@ -29,7 +29,7 @@ class GPIOLineConfig
     {
         for ($i = 0; $i < 64; $i++) { // GPIO_V2_LINES_MAX
             $this->line_configs[$i] = new GPIOPerLineConfig();
-            $this->output_values[$i] = LineValue::Inactive;
+            $this->output_values[$i] = LineValue::INACTIVE;
         }
     }
 }

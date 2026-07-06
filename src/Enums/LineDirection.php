@@ -4,7 +4,7 @@ namespace Microscrap\Bindings\GPIO\Enums;
 
 enum LineDirection: int
 {
-    case AsIs = 1;
-    case Input = 2;
-    case Output = 3;
+    case AS_IS = 1;
+    case INPUT = 2;
+    case OUTPUT = 3;
 }

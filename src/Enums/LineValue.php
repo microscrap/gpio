@@ -4,7 +4,7 @@ namespace Microscrap\Bindings\GPIO\Enums;
 
 enum LineValue: int
 {
-    case Error = -1;
-    case Inactive = 0;
-    case Active = 1;
+    case ERROR = -1;
+    case INACTIVE = 0;
+    case ACTIVE = 1;
 }
