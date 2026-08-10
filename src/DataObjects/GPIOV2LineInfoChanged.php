@@ -34,7 +34,7 @@ final readonly class GPIOV2LineInfoChanged
         $timestamp_ns = unpack('P', substr($buffer, 256, 8))[1];
         $event_type_raw = unpack('V', substr($buffer, 264, 4))[1];
         $event_type = InfoEventType::tryFrom($event_type_raw);
-        if ($event_type === null) {
+        if (is_null($event_type)) {
             return null;
         }
 

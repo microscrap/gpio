@@ -152,7 +152,7 @@ class LineSettings
     public static function gpioLineSettingsSetOutputValue(GPIOLineSettings $settings, LineValue|int $output_value): int
     {
         $resolved = $output_value instanceof LineValue ? $output_value : LineValue::tryFrom($output_value);
-        if (! $resolved instanceof LineValue || $resolved === LineValue::Error) {
+        if (! $resolved instanceof LineValue || $resolved === LineValue::ERROR) {
             return -1;
         }
 

@@ -1,8 +1,16 @@
 # microscrap/gpio — Linux GPIO bindings for ScrapyardIO
 
-PHP library that wraps the [**posi**](https://github.com/php-io-extensions/posi) extension with global helpers, enums, and data objects. Every helper delegates to a facade class under `Microscrap\Bindings\GPIO`.
+> **Docs (production):** [ScrapyardIO · microscrap/gpio 0.7.x](https://scrapyard-io.projectsaturnstudios.com/ecosystem/microscrap/gpio/0.7.x/overview)
 
-This project provides PHP bindings to the Linux GPIO character device API (GPIO uAPI v2), mirroring the public surface of [libgpiod v2](https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/).
+[![Docs](https://img.shields.io/badge/docs-ScrapyardIO-0ea5e9?logo=readthedocs&logoColor=white)](https://scrapyard-io.projectsaturnstudios.com/ecosystem/microscrap/gpio/0.7.x/overview)
+[![Packagist Version](https://img.shields.io/packagist/v/microscrap/gpio.svg?label=packagist)](https://packagist.org/packages/microscrap/gpio)
+[![PHP Version Require](https://img.shields.io/packagist/php-v/microscrap/gpio.svg)](https://packagist.org/packages/microscrap/gpio)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Requires ext-posi](https://img.shields.io/badge/ext--posi-%5E0.7-777bb4?logo=php&logoColor=white)](https://github.com/php-io-extensions/posi)
+
+PHP library that wraps the [**posi**](https://github.com/php-io-extensions/posi) extension (`ext-posi`) with global helpers, enums, and data objects. Every helper delegates to a facade class under `Microscrap\Bindings\GPIO`.
+
+This is the **bindings** package — not the native extension. It mirrors the public surface of [libgpiod v2](https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/) over Linux GPIO character device uAPI v2. Ecosystem docs: [`0.7.x`](https://scrapyard-io.projectsaturnstudios.com/ecosystem/microscrap/gpio/0.7.x/overview).
 
 ## Highlights
 
@@ -16,10 +24,10 @@ This project provides PHP bindings to the Linux GPIO character device API (GPIO 
 
 ## Requirements
 
-* PHP 8.3+
+* PHP `^8.4|^8.5|^8.6`
 * Linux kernel 5.10+ (GPIO uAPI v2)
-* **ext-posi** ^0.4.0 — install from [php-io-extensions/posi](https://github.com/php-io-extensions/posi)
-* **microscrap/posix** ^0.4.0
+* **ext-posi** `^0.7.0` — install from [php-io-extensions/posi](https://github.com/php-io-extensions/posi)
+* **microscrap/posix** `^0.7.0`
 
 ## Installation
 
@@ -39,7 +47,7 @@ Composer autoloads all helper files in `src/Helpers/`, registering global `gpiod
 
 GPIO is controlled through **global helper functions** named after their libgpiod counterparts (`gpiod_chip_open`, `gpiod_line_request_set_value`, etc.). Helpers are only defined if the name is not already taken (`function_exists` guard).
 
-Enums live under `Microscrap\Bindings\GPIO\Enums`. Data objects live under `Microscrap\Bindings\GPIO\DataObjects`.
+Enums live under `Microscrap\Bindings\GPIO\Enums` — cases are **FULLY UPPERCASE**. Data objects live under `Microscrap\Bindings\GPIO\DataObjects`.
 
 **Example — blink an LED on GPIO 17, read a button on GPIO 27**
 
@@ -53,12 +61,12 @@ use Microscrap\Bindings\GPIO\Enums\LineValue;
 $chip = gpiod_chip_open('/dev/gpiochip0');
 
 $led_settings = gpiod_line_settings_new();
-gpiod_line_settings_set_direction($led_settings, LineDirection::Output);
-gpiod_line_settings_set_output_value($led_settings, LineValue::Inactive);
+gpiod_line_settings_set_direction($led_settings, LineDirection::OUTPUT);
+gpiod_line_settings_set_output_value($led_settings, LineValue::INACTIVE);
 
 $btn_settings = gpiod_line_settings_new();
-gpiod_line_settings_set_direction($btn_settings, LineDirection::Input);
-gpiod_line_settings_set_edge_detection($btn_settings, LineEdge::Rising);
+gpiod_line_settings_set_direction($btn_settings, LineDirection::INPUT);
+gpiod_line_settings_set_edge_detection($btn_settings, LineEdge::RISING);
 
 $line_config = gpiod_line_config_new();
 gpiod_line_config_add_line_settings($line_config, [17], $led_settings);
@@ -71,9 +79,9 @@ $request = gpiod_chip_request_lines($chip, $req_config, $line_config);
 
 // Blink 5 times
 for ($i = 0; $i < 5; $i++) {
-    gpiod_line_request_set_value($request, 17, LineValue::Active);
+    gpiod_line_request_set_value($request, 17, LineValue::ACTIVE);
     usleep(500_000);
-    gpiod_line_request_set_value($request, 17, LineValue::Inactive);
+    gpiod_line_request_set_value($request, 17, LineValue::INACTIVE);
     usleep(500_000);
 }
 
@@ -222,14 +230,14 @@ Returns a deep copy (PHP `clone`).
 | `gpiod_line_info_get_name(GPIOLineInfo $info): string` | Line name (`""` if unnamed) |
 | `gpiod_line_info_is_used(GPIOLineInfo $info): bool` | Whether the line is currently claimed |
 | `gpiod_line_info_get_consumer(GPIOLineInfo $info): string` | Consumer label (`""` if none) |
-| `gpiod_line_info_get_direction(GPIOLineInfo $info): LineDirection` | `Input` or `Output` |
-| `gpiod_line_info_get_edge_detection(GPIOLineInfo $info): LineEdge` | `None`, `Rising`, `Falling`, or `Both` |
-| `gpiod_line_info_get_bias(GPIOLineInfo $info): LineBias` | `Unknown`, `Disabled`, `PullUp`, or `PullDown` |
-| `gpiod_line_info_get_drive(GPIOLineInfo $info): LineDrive` | `PushPull`, `OpenDrain`, or `OpenSource` |
+| `gpiod_line_info_get_direction(GPIOLineInfo $info): LineDirection` | `INPUT` or `OUTPUT` |
+| `gpiod_line_info_get_edge_detection(GPIOLineInfo $info): LineEdge` | `NONE`, `RISING`, `FALLING`, or `BOTH` |
+| `gpiod_line_info_get_bias(GPIOLineInfo $info): LineBias` | `UNKNOWN`, `DISABLED`, `PULL_UP`, or `PULL_DOWN` |
+| `gpiod_line_info_get_drive(GPIOLineInfo $info): LineDrive` | `PUSH_PULL`, `OPEN_DRAIN`, or `OPEN_SOURCE` |
 | `gpiod_line_info_is_active_low(GPIOLineInfo $info): bool` | Active-low flag |
 | `gpiod_line_info_is_debounced(GPIOLineInfo $info): bool` | Whether debounce is active |
 | `gpiod_line_info_get_debounce_period_us(GPIOLineInfo $info): int` | Debounce period in microseconds |
-| `gpiod_line_info_get_event_clock(GPIOLineInfo $info): LineClock` | `Monotonic`, `Realtime`, or `Hte` |
+| `gpiod_line_info_get_event_clock(GPIOLineInfo $info): LineClock` | `MONOTONIC`, `REALTIME`, or `HTE` |
 
 ---
 
@@ -239,7 +247,7 @@ Returns a deep copy (PHP `clone`).
 
 #### `gpiod_line_settings_new(): GPIOLineSettings`
 
-Returns a new settings object with defaults: direction `AsIs`, edge `None`, bias `AsIs`, drive `PushPull`, active-low `false`, clock `Monotonic`, debounce `0`, output value `Inactive`.
+Returns a new settings object with defaults: direction `AS_IS`, edge `NONE`, bias `AS_IS`, drive `PUSH_PULL`, active-low `false`, clock `MONOTONIC`, debounce `0`, output value `INACTIVE`.
 
 #### `gpiod_line_settings_reset(GPIOLineSettings $settings): void`
 
@@ -289,7 +297,7 @@ Returns a copy of the settings for `$offset`, or `null` if the offset is not con
 
 #### `gpiod_line_config_set_output_values(GPIOLineConfig $config, array $values): int`
 
-Overrides the output values for all configured offsets, by configuration index. `$values` must be an array of `LineValue` (or int-castable equivalents); `LineValue::Error` is rejected. Returns `0` on success.
+Overrides the output values for all configured offsets, by configuration index. `$values` must be an array of `LineValue` (or int-castable equivalents); `LineValue::ERROR` is rejected. Returns `0` on success.
 
 | Helper | Returns |
 |--------|---------|
@@ -333,11 +341,11 @@ Closes the request file descriptor and releases all lines. Returns `0` on succes
 
 #### `gpiod_line_request_get_value(GPIOLineRequest $request, int $offset): ?LineValue`
 
-Reads the current value of a single line. Returns `LineValue::Active`, `LineValue::Inactive`, or `null` on failure.
+Reads the current value of a single line. Returns `LineValue::ACTIVE`, `LineValue::INACTIVE`, or `null` on failure.
 
 ```php
 $v = gpiod_line_request_get_value($request, 27);
-echo $v === LineValue::Active ? "HIGH\n" : "LOW\n";
+echo $v === LineValue::ACTIVE ? "HIGH\n" : "LOW\n";
 ```
 
 #### `gpiod_line_request_get_values(GPIOLineRequest $request): ?array`
@@ -353,7 +361,7 @@ Reads values for the specified subset of offsets.
 Drives a single line. Returns `0` on success, `-1` on failure.
 
 ```php
-gpiod_line_request_set_value($request, 17, LineValue::Active);
+gpiod_line_request_set_value($request, 17, LineValue::ACTIVE);
 ```
 
 #### `gpiod_line_request_set_values(GPIOLineRequest $request, array $values): int`
@@ -449,7 +457,7 @@ Returns `true` if `$path` is a GPIO character device (or a symlink resolving to 
 
 #### `gpiod_api_version(): string`
 
-Returns the package version string (e.g. `"0.4.0"`).
+Returns the package version string (e.g. `"0.7.0"`).
 
 ---
 
@@ -464,12 +472,12 @@ All enums are `int`-backed with `SCREAMING_SNAKE_CASE` cases where they map to k
 | `GPIOV2LineAttrId` | `Enums` | `FLAGS`, `OUTPUT_VALUES`, `DEBOUNCE` |
 | `InfoEventType` | `Enums` | `LINE_REQUESTED`, `LINE_RELEASED`, `LINE_CONFIG_CHANGED` |
 | `EdgeEventType` | `Enums` | `RISING_EDGE`, `FALLING_EDGE` |
-| `LineDirection` | `Enums` | `AsIs`, `Input`, `Output` |
-| `LineEdge` | `Enums` | `None`, `Rising`, `Falling`, `Both` |
-| `LineBias` | `Enums` | `AsIs`, `Unknown`, `Disabled`, `PullUp`, `PullDown` |
-| `LineDrive` | `Enums` | `PushPull`, `OpenDrain`, `OpenSource` |
-| `LineClock` | `Enums` | `Monotonic`, `Realtime`, `Hte` |
-| `LineValue` | `Enums` | `Error` (-1), `Inactive` (0), `Active` (1) |
+| `LineDirection` | `Enums` | `AS_IS`, `INPUT`, `OUTPUT` |
+| `LineEdge` | `Enums` | `NONE`, `RISING`, `FALLING`, `BOTH` |
+| `LineBias` | `Enums` | `AS_IS`, `UNKNOWN`, `DISABLED`, `PULL_UP`, `PULL_DOWN` |
+| `LineDrive` | `Enums` | `PUSH_PULL`, `OPEN_DRAIN`, `OPEN_SOURCE` |
+| `LineClock` | `Enums` | `MONOTONIC`, `REALTIME`, `HTE` |
+| `LineValue` | `Enums` | `ERROR` (-1), `INACTIVE` (0), `ACTIVE` (1) |
 
 ---
 

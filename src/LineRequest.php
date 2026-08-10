@@ -89,7 +89,7 @@ class LineRequest
             }
 
             $line_index = static::indexForOffset($request, $offset);
-            if ($line_index === null) {
+            if (is_null($line_index)) {
                 return null;
             }
 
@@ -167,7 +167,7 @@ class LineRequest
             }
 
             $line_index = static::indexForOffset($request, $offset);
-            if ($line_index === null) {
+            if (is_null($line_index)) {
                 return -1;
             }
 

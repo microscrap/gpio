@@ -11,6 +11,6 @@ class Misc
 
     public static function gpioMiscAPIVersion(): string
     {
-        return '0.4.0';
+        return '0.7.0';
     }
 }

@@ -24,27 +24,27 @@ class LineInfo
     {
         // --- Direction ---
         $direction = $uapi_info->hasFlag(GPIOV2LineFlag::OUTPUT)
-            ? LineDirection::Output
-            : LineDirection::Input;
+            ? LineDirection::OUTPUT
+            : LineDirection::INPUT;
 
         // --- Drive ---
         if ($uapi_info->hasFlag(GPIOV2LineFlag::OPEN_DRAIN)) {
-            $drive = LineDrive::OpenDrain;
+            $drive = LineDrive::OPEN_DRAIN;
         } elseif ($uapi_info->hasFlag(GPIOV2LineFlag::OPEN_SOURCE)) {
-            $drive = LineDrive::OpenSource;
+            $drive = LineDrive::OPEN_SOURCE;
         } else {
-            $drive = LineDrive::PushPull;
+            $drive = LineDrive::PUSH_PULL;
         }
 
         // --- Bias ---
         if ($uapi_info->hasFlag(GPIOV2LineFlag::BIAS_PULL_UP)) {
-            $bias = LineBias::PullUp;
+            $bias = LineBias::PULL_UP;
         } elseif ($uapi_info->hasFlag(GPIOV2LineFlag::BIAS_PULL_DOWN)) {
-            $bias = LineBias::PullDown;
+            $bias = LineBias::PULL_DOWN;
         } elseif ($uapi_info->hasFlag(GPIOV2LineFlag::BIAS_DISABLED)) {
-            $bias = LineBias::Disabled;
+            $bias = LineBias::DISABLED;
         } else {
-            $bias = LineBias::Unknown;
+            $bias = LineBias::UNKNOWN;
         }
 
         // --- Edge detection ---
@@ -52,19 +52,19 @@ class LineInfo
         $falling = $uapi_info->hasFlag(GPIOV2LineFlag::EDGE_FALLING);
 
         $edge = match (true) {
-            $rising && $falling => LineEdge::Both,
-            $rising             => LineEdge::Rising,
-            $falling            => LineEdge::Falling,
-            default             => LineEdge::None,
+            $rising && $falling => LineEdge::BOTH,
+            $rising             => LineEdge::RISING,
+            $falling            => LineEdge::FALLING,
+            default             => LineEdge::NONE,
         };
 
         // --- Event clock ---
         if ($uapi_info->hasFlag(GPIOV2LineFlag::EVENT_CLOCK_REALTIME)) {
-            $event_clock = LineClock::Realtime;
+            $event_clock = LineClock::REALTIME;
         } elseif ($uapi_info->hasFlag(GPIOV2LineFlag::EVENT_CLOCK_HTE)) {
-            $event_clock = LineClock::Hte;
+            $event_clock = LineClock::HTE;
         } else {
-            $event_clock = LineClock::Monotonic;
+            $event_clock = LineClock::MONOTONIC;
         }
 
         // --- Debounce: scan attrs for GPIOV2LineAttrId::DEBOUNCE ---
