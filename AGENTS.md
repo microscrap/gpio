@@ -4,7 +4,7 @@
 
 ## Role
 
-Bindings-only Composer package over **ext-posi** + `microscrap/posix` (`^0.7.0`). Global `gpiod_*` helpers, facades under `Microscrap\Bindings\GPIO`, enums, and data objects mirroring libgpiod v2 / GPIO uAPI v2. No ServiceProvider, no Chassis/Core coupling, no Fabricate remaps.
+Bindings-only Composer package over **ext-posi** + `microscrap/posix` (`^0.8.0`). Global `gpiod_*` helpers, facades under `Microscrap\Bindings\GPIO`, enums, and data objects mirroring libgpiod v2 / GPIO uAPI v2. No ServiceProvider, no Chassis/Core coupling, no Fabricate remaps.
 
 ## Rules
 
