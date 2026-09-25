@@ -4,7 +4,7 @@ title: Pair with protocol peers
 description: "posix/posi below; uart / i2c / spi beside; gpio-framework sits above — this package is GPIO bindings only."
 resource: .
 tags: [orientation, gpio, posix, uart, i2c, spi, composition]
-generated: { by: "okf-documentation-generator/cursor", at: "2026-08-10T22:04:45Z" }
+generated: { by: "claude-opus-5-5", at: "2026-09-24T16:32:08Z" }
 status: draft
 sources:
   - id: composer
@@ -27,18 +27,18 @@ sources:
 
 | Concern | Package |
 |---------|---------|
-| POSIX FD / syscall helpers | `microscrap/posix` `^0.7` (required peer) |
-| Native FD / ioctl | **ext-posi** `^0.7.0` (`Posi\System`) |
+| POSIX FD / syscall helpers | `microscrap/posix` `^0.9` (required peer) |
+| Native FD / ioctl | **ext-posi** `^0.9.0` (`Posi\System`) |
 | GPIO chip / line uAPI v2 | `microscrap/gpio` (this package) |
-| UART | `microscrap/uart` `^0.7` (sibling protocol) |
-| I2C | `microscrap/i2c` `^0.7` (sibling protocol) |
-| SPI | `microscrap/spi` `^0.7` (sibling protocol) |
+| UART | `microscrap/uart` `^0.8` (sibling protocol) |
+| I2C | `microscrap/i2c` `^0.8` (sibling protocol) |
+| SPI | `microscrap/spi` `^0.8` (sibling protocol) |
 | USB MPSSE / FTDI | `microscrap/ftdi` / `microscrap/mpsse` (beside — USB path, not a gpio child) |
-| Higher GPIO orchestration | `scrapyard-io/gpio-framework` `^0.7` (suggested; above this package)[^composer] |
+| Higher GPIO orchestration | `scrapyard-io/framework` `^0.9` (suggested; above this package)[^composer] |
 
 # Typical flow
 
-1. Depend on this package (pulls **ext-posi** + `microscrap/posix` `^0.7.0`).[^composer]
+1. Depend on this package (pulls **ext-posi** + `microscrap/posix` `^0.9.0`).[^composer]
 2. Open `/dev/gpiochipN`, configure lines, request ownership, read/write / edge-wait via `gpiod_*` helpers.[^readme][^chip]
 3. Application / `gpio-framework` composes this peer — do not invent framework providers inside this package.[^agents]
 
@@ -49,7 +49,7 @@ sources:
 
 # Related
 
-* [Package (0.7)](package.md)
+* [Package (0.9)](package.md)
 * [Helpers → gpiod facades → posix/posi](../architecture/helpers-gpiod-posi.md)
 
 [^composer]: Require posix/posi; suggest gpio-framework

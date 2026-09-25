@@ -1,10 +1,10 @@
 ---
 type: Orientation
-title: Package (0.7)
-description: "microscrap/gpio 0.7.0 — bindings-only libgpiod v2 / GPIO uAPI v2 helpers; helpers → facades → posix/posi; no ServiceProvider."
+title: Package (0.9)
+description: "microscrap/gpio 0.9.0 — bindings-only libgpiod v2 / GPIO uAPI v2 helpers; helpers → facades → posix/posi; no ServiceProvider."
 resource: .
-tags: [orientation, gpio, microscrap, bindings, gpiod, 0.7]
-generated: { by: "okf-documentation-generator/cursor", at: "2026-08-10T22:04:45Z" }
+tags: [orientation, gpio, microscrap, bindings, gpiod, 0.9]
+generated: { by: "claude-opus-5-5", at: "2026-09-24T16:32:08Z" }
 status: draft
 sources:
   - id: composer
@@ -26,16 +26,16 @@ sources:
 
 # What it is
 
-Composer package `microscrap/gpio` at **0.7.0** — pure-PHP bindings that mirror [libgpiod v2](https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/) over Linux GPIO character-device uAPI v2, built on **ext-posi** and [`microscrap/posix`](https://github.com/microscrap/posix).[^composer][^readme]
+Composer package `microscrap/gpio` at **0.9.0** — pure-PHP bindings that mirror [libgpiod v2](https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/) over Linux GPIO character-device uAPI v2, built on **ext-posi** and [`microscrap/posix`](https://github.com/microscrap/posix).[^composer][^readme]
 
 | Field | Value |
 |-------|-------|
 | Name | `microscrap/gpio` |
-| Version | `0.7.0` |
+| Version | `0.9.0` |
 | PHP | `^8.4\|^8.5\|^8.6`[^composer] |
 | Namespace | `Microscrap\Bindings\GPIO\` → `src/`[^composer] |
-| Require | `ext-posi` `^0.7.0`, `microscrap/posix` `^0.7.0`[^composer] |
-| Suggest | `scrapyard-io/gpio-framework` `^0.7`[^composer] |
+| Require | `ext-posi` `^0.9.0`, `microscrap/posix` `^0.9.0`[^composer] |
+| Suggest | `scrapyard-io/framework` `^0.9.0`[^composer] |
 | Homepage | Ecosystem docs overview (see [Ecosystem docs](ecosystem-docs.md))[^composer] |
 | Discovery | **None** — no provider / Chassis registration in this package[^readme][^agents] |
 | Role | Bindings layer only (helpers + facades + enums + DataObjects)[^helpers-chip][^chip][^readme] |
@@ -68,7 +68,7 @@ Autoloads helper files under `src/Helpers/` registering global `gpiod_*` functio
 | Enums | [Enums for gpiod](../conventions/enums-gpiod.md) |
 | Peer stack | [Pair with protocol peers](pairing-protocol-peers.md) |
 | Docs site | [Ecosystem docs](ecosystem-docs.md) |
-| Peer | `microscrap/posix` 0.7.0 |
+| Peer | `microscrap/posix` 0.9.0 |
 
 [^composer]: Package name, version, PHP, require, suggest, autoload helpers
 [^readme]: Package README

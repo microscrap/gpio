@@ -4,7 +4,7 @@ title: Enums for gpiod
 description: "GPIO direction/edge/bias/drive/clock/value and ioctl enums are int-backed with FULLY UPPERCASE cases; no class constants."
 resource: src/Enums/
 tags: [convention, enums, gpio, gpiod]
-generated: { by: "okf-documentation-generator/cursor", at: "2026-08-10T22:04:45Z" }
+generated: { by: "claude-opus-5-5", at: "2026-09-24T16:32:08Z" }
 status: draft
 sources:
   - id: readme
@@ -62,7 +62,7 @@ Typed tokens for libgpiod-style line settings, event types, kernel ioctl opcodes
 - No class-level constants in `src/`.[^agents]
 - Pass enum instances (or `->value` where a raw `int` is required) into typed helper / facade APIs.[^readme]
 
-# Enum inventory (0.7.0)
+# Enum inventory (0.9.0)
 
 | Enum | Backing | Cases (summary) |
 |------|---------|-----------------|
@@ -82,7 +82,7 @@ Typed tokens for libgpiod-style line settings, event types, kernel ioctl opcodes
 # Related
 
 * [1:1 libgpiod wrap](one-to-one-libgpiod-wrap.md)
-* [Package (0.7)](../orientation/package.md)
+* [Package (0.9)](../orientation/package.md)
 * [Helpers → gpiod facades → posix/posi](../architecture/helpers-gpiod-posi.md)
 
 [^readme]: Enum table and UPPERCASE note

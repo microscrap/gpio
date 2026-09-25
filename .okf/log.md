@@ -14,3 +14,6 @@
 * Pattern mirrored from `microscrap/posix` / `microscrap/mpsse` / `microscrap/open-gl` OKF layout; adapted for libgpiod-style facades + DataObjects over posix/posi.
 * Root `AGENTS.md` already present with Quick OKF map — left in place; concept paths match that map.
 * All new concepts left `status: draft` pending Angel human verification.
+
+## 2026-09-24
+* **Update**: 0.9.0 line. `composer.json` version, `ext-posi` / `microscrap/posix` requires `^0.9.0`, branch alias `0.9.x-dev`, suggest renamed to `scrapyard-io/framework` `^0.9.0`; README and AGENTS version references; [Package (0.9)](/orientation/package.md), [Ecosystem docs](/orientation/ecosystem-docs.md), [Pair with protocol peers](/orientation/pairing-protocol-peers.md), [Enums for gpiod](/conventions/enums-gpiod.md), [Helpers → gpiod facades → posix/posi](/architecture/helpers-gpiod-posi.md) relabelled. No API change. Needed by `microscrap/scrapyard-linux` 0.9.0, whose Posix DigitalIO driver calls the `gpiod_*` helpers.

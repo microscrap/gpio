@@ -53,7 +53,7 @@ Rules:[^agents][^readme]
 3. Do not invent parallel APIs that bypass facades into ad-hoc ioctl scripts from helpers.[^agents]
 4. DataObjects under `src/DataObjects/` hold state (FDs, configs, events); do not invent a second object model.[^readme]
 
-# Facade inventory (0.7.0)
+# Facade inventory (0.9.0)
 
 | Facade | Typical helpers | Role |
 |--------|-----------------|------|

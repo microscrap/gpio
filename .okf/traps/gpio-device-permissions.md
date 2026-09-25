@@ -42,7 +42,7 @@ Separately, `GPIO_V2_GET_LINE` requests exclusive ownership of configured lines.
 # Related
 
 * [Helpers → gpiod facades → posix/posi](../architecture/helpers-gpiod-posi.md)
-* [Package (0.7)](../orientation/package.md)
+* [Package (0.9)](../orientation/package.md)
 
 [^readme]: Requirements, chip open, request_lines null-on-failure
 [^chip]: Chip open verifies device then posix_open

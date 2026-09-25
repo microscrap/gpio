@@ -1,17 +1,17 @@
 ---
 type: Reference
 title: Ecosystem docs
-description: "Published ScrapyardIO ecosystem docs for microscrap/gpio 0.7.x."
-resource: "https://scrapyard-io.projectsaturnstudios.com/ecosystem/microscrap/gpio/0.7.x/overview"
-tags: [orientation, docs, ecosystem, 0.7]
-generated: { by: "okf-documentation-generator/cursor", at: "2026-08-10T22:04:45Z" }
+description: "Published ScrapyardIO ecosystem docs for microscrap/gpio 0.9.x."
+resource: "https://scrapyard-io.projectsaturnstudios.com/ecosystem/microscrap/gpio/0.9.x/overview"
+tags: [orientation, docs, ecosystem, 0.9]
+generated: { by: "claude-opus-5-5", at: "2026-09-24T16:32:08Z" }
 status: draft
 sources:
   - id: composer-homepage
     resource: composer.json
     title: composer.json homepage / support.docs fields
   - id: overview
-    resource: "https://scrapyard-io.projectsaturnstudios.com/ecosystem/microscrap/gpio/0.7.x/overview"
+    resource: "https://scrapyard-io.projectsaturnstudios.com/ecosystem/microscrap/gpio/0.9.x/overview"
     title: Ecosystem overview page
   - id: readme
     resource: README.md
@@ -22,7 +22,7 @@ sources:
 
 Human-facing package docs live on the ScrapyardIO ecosystem site:[^overview]
 
-[https://scrapyard-io.projectsaturnstudios.com/ecosystem/microscrap/gpio/0.7.x/overview](https://scrapyard-io.projectsaturnstudios.com/ecosystem/microscrap/gpio/0.7.x/overview)
+[https://scrapyard-io.projectsaturnstudios.com/ecosystem/microscrap/gpio/0.9.x/overview](https://scrapyard-io.projectsaturnstudios.com/ecosystem/microscrap/gpio/0.9.x/overview)
 
 `composer.json` `homepage` and `support.docs` point at that overview.[^composer-homepage][^readme]
 
@@ -34,7 +34,7 @@ Human-facing package docs live on the ScrapyardIO ecosystem site:[^overview]
 
 # Related
 
-* [Package (0.7)](package.md)
+* [Package (0.9)](package.md)
 
 [^composer-homepage]: composer.json homepage / support.docs fields
 [^overview]: Ecosystem overview page
