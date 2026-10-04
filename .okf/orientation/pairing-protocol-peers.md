@@ -1,15 +1,15 @@
 ---
 type: Orientation
 title: Pair with protocol peers
-description: "posix/posi below; uart / i2c / spi beside; gpio-framework sits above — this package is GPIO bindings only."
+description: "ext-posi below; uart / i2c / spi beside; gpio-framework sits above — this package is GPIO bindings only."
 resource: .
-tags: [orientation, gpio, posix, uart, i2c, spi, composition]
+tags: [orientation, gpio, posi, uart, i2c, spi, composition]
 generated: { by: "claude-opus-5-5", at: "2026-09-24T16:32:08Z" }
 status: draft
 sources:
   - id: composer
     resource: composer.json
-    title: Require posix/posi; suggest gpio-framework
+    title: Require ext-posi; suggest gpio-framework
   - id: readme
     resource: README.md
     title: Bindings role and requirements
@@ -18,7 +18,7 @@ sources:
     title: Suggested peer only; no framework internals
   - id: chip
     resource: src/Chip.php
-    title: Chip open uses posix_open / FileControlFlag
+    title: Chip open uses posix_open with O_RDWR | O_CLOEXEC
 ---
 
 # Composition boundary
@@ -27,18 +27,17 @@ sources:
 
 | Concern | Package |
 |---------|---------|
-| POSIX FD / syscall helpers | `microscrap/posix` `^0.9` (required peer) |
-| Native FD / ioctl | **ext-posi** `^0.9.0` (`Posi\System`) |
+| Native FD / syscall / ioctl | **ext-posi** `^0.10.0` (global `posix_*`, `ioctl`, `fcntl` functions; required) |
 | GPIO chip / line uAPI v2 | `microscrap/gpio` (this package) |
-| UART | `microscrap/uart` `^0.8` (sibling protocol) |
-| I2C | `microscrap/i2c` `^0.8` (sibling protocol) |
-| SPI | `microscrap/spi` `^0.8` (sibling protocol) |
+| UART | `microscrap/uart` `^0.10` (sibling protocol) |
+| I2C | `microscrap/i2c` `^0.10` (sibling protocol) |
+| SPI | `microscrap/spi` `^0.10` (sibling protocol) |
 | USB MPSSE / FTDI | `microscrap/ftdi` / `microscrap/mpsse` (beside — USB path, not a gpio child) |
-| Higher GPIO orchestration | `scrapyard-io/framework` `^0.9` (suggested; above this package)[^composer] |
+| Higher GPIO orchestration | `scrapyard-io/framework` `^0.10` (suggested; above this package)[^composer] |
 
 # Typical flow
 
-1. Depend on this package (pulls **ext-posi** + `microscrap/posix` `^0.9.0`).[^composer]
+1. Depend on this package (requires **ext-posi** `^0.10.0`).[^composer]
 2. Open `/dev/gpiochipN`, configure lines, request ownership, read/write / edge-wait via `gpiod_*` helpers.[^readme][^chip]
 3. Application / `gpio-framework` composes this peer — do not invent framework providers inside this package.[^agents]
 
@@ -49,10 +48,10 @@ sources:
 
 # Related
 
-* [Package (0.9)](package.md)
-* [Helpers → gpiod facades → posix/posi](../architecture/helpers-gpiod-posi.md)
+* [Package (0.10)](package.md)
+* [Helpers → gpiod facades → posi](../architecture/helpers-gpiod-posi.md)
 
-[^composer]: Require posix/posi; suggest gpio-framework
+[^composer]: Require ext-posi; suggest gpio-framework
 [^readme]: Bindings role and requirements
 [^agents]: Suggested peer only; no framework internals
-[^chip]: Chip open uses posix_open / FileControlFlag
+[^chip]: Chip open uses posix_open with O_RDWR | O_CLOEXEC

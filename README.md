@@ -1,16 +1,16 @@
 # microscrap/gpio — Linux GPIO bindings for ScrapyardIO
 
-> **Docs (production):** [ScrapyardIO · microscrap/gpio 0.9.x](https://scrapyard-io.projectsaturnstudios.com/ecosystem/microscrap/gpio/0.9.x/overview)
+> **Docs (production):** [ScrapyardIO · microscrap/gpio 0.10.x](https://scrapyard-io.projectsaturnstudios.com/ecosystem/microscrap/gpio/0.10.x/overview)
 
-[![Docs](https://img.shields.io/badge/docs-ScrapyardIO-0ea5e9?logo=readthedocs&logoColor=white)](https://scrapyard-io.projectsaturnstudios.com/ecosystem/microscrap/gpio/0.9.x/overview)
+[![Docs](https://img.shields.io/badge/docs-ScrapyardIO-0ea5e9?logo=readthedocs&logoColor=white)](https://scrapyard-io.projectsaturnstudios.com/ecosystem/microscrap/gpio/0.10.x/overview)
 [![Packagist Version](https://img.shields.io/packagist/v/microscrap/gpio.svg?label=packagist)](https://packagist.org/packages/microscrap/gpio)
 [![PHP Version Require](https://img.shields.io/packagist/php-v/microscrap/gpio.svg)](https://packagist.org/packages/microscrap/gpio)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Requires ext-posi](https://img.shields.io/badge/ext--posi-%5E0.9-777bb4?logo=php&logoColor=white)](https://github.com/php-io-extensions/posi)
+[![Requires ext-posi](https://img.shields.io/badge/ext--posi-%5E0.10-777bb4?logo=php&logoColor=white)](https://github.com/php-io-extensions/posi)
 
-PHP library that wraps the [**posi**](https://github.com/php-io-extensions/posi) extension (`ext-posi`) with global helpers, enums, and data objects. Every helper delegates to a facade class under `Microscrap\Bindings\GPIO`.
+PHP library that wraps the [**posi**](https://github.com/php-io-extensions/posi) extension (`ext-posi`, which also provides the `posix_*` functions) with global helpers, enums, and data objects. Every helper delegates to a facade class under `Microscrap\Bindings\GPIO`.
 
-This is the **bindings** package — not the native extension. It mirrors the public surface of [libgpiod v2](https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/) over Linux GPIO character device uAPI v2. Ecosystem docs: [`0.9.x`](https://scrapyard-io.projectsaturnstudios.com/ecosystem/microscrap/gpio/0.9.x/overview).
+This is the **bindings** package — not the native extension. It mirrors the public surface of [libgpiod v2](https://git.kernel.org/pub/scm/libs/libgpiod/libgpiod.git/) over Linux GPIO character device uAPI v2. Ecosystem docs: [`0.10.x`](https://scrapyard-io.projectsaturnstudios.com/ecosystem/microscrap/gpio/0.10.x/overview).
 
 ## Highlights
 
@@ -26,8 +26,7 @@ This is the **bindings** package — not the native extension. It mirrors the pu
 
 * PHP `^8.4|^8.5|^8.6`
 * Linux kernel 5.10+ (GPIO uAPI v2)
-* **ext-posi** `^0.9.0` — install from [php-io-extensions/posi](https://github.com/php-io-extensions/posi)
-* **microscrap/posix** `^0.9.0`
+* **ext-posi** `^0.10.0` — install from [php-io-extensions/posi](https://github.com/php-io-extensions/posi)
 
 ## Installation
 
@@ -457,7 +456,7 @@ Returns `true` if `$path` is a GPIO character device (or a symlink resolving to 
 
 #### `gpiod_api_version(): string`
 
-Returns the package version string (e.g. `"0.9.0"`).
+Returns the package version string (e.g. `"0.10.0"`).
 
 ---
 

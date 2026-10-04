@@ -4,11 +4,11 @@
 
 ## Role
 
-Bindings-only Composer package over **ext-posi** + `microscrap/posix` (`^0.9.0`). Global `gpiod_*` helpers, facades under `Microscrap\Bindings\GPIO`, enums, and data objects mirroring libgpiod v2 / GPIO uAPI v2. No ServiceProvider, no Chassis/Core coupling, no Fabricate remaps.
+Bindings-only Composer package over **ext-posi** (`^0.10.0`). Global `gpiod_*` helpers, facades under `Microscrap\Bindings\GPIO`, enums, and data objects mirroring libgpiod v2 / GPIO uAPI v2. No ServiceProvider, no Chassis/Core coupling, no Fabricate remaps.
 
 ## Rules
 
-* Helpers delegate to package facades (`Chip`, `LineRequest`, …) which use posix / posi for FD and ioctl work — do not invent parallel APIs.
+* Helpers delegate to package facades (`Chip`, `LineRequest`, …) which call ext-posi global functions (`posix_*`, `ioctl`) for FD and ioctl work — do not invent parallel APIs.
 * Keep 1:1 coverage with helpers already in `src/Helpers/`; document drift in README / ecosystem docs.
 * Enums in `src/Enums/*` are int-backed with **FULLY UPPERCASE** cases.
 * Prefer `is_null($var)` over `$var === null`.

@@ -14,8 +14,6 @@ use Microscrap\Bindings\GPIO\DataObjects\GPIOV2LineInfoChanged;
 use Microscrap\Bindings\GPIO\DataObjects\GPIOV2LineConfig;
 use Microscrap\Bindings\GPIO\DataObjects\GPIOV2LineRequest;
 use Microscrap\Bindings\GPIO\Enums\GPIOOpCode;
-use Microscrap\Bindings\POSIX\Enums\FileControlFlag;
-use Posi\System;
 
 class Chip
 {
@@ -27,8 +25,7 @@ class Chip
             return null;
         }
 
-        $flags = FileControlFlag::O_RDWR->value | FileControlFlag::O_CLOEXEC->value;
-        $fd = posix_open($path, $flags);
+        $fd = posix_open($path, O_RDWR | O_CLOEXEC);
         if ($fd < 0) {
             return null;
         }
@@ -88,12 +85,12 @@ class Chip
 
     public static function gpioChipWaitInfoEvent(GPIOChip $chip, int $timeout_ns): ?int
     {
-        return System::ppoll($chip->fd, $timeout_ns);
+        return posix_ppoll($chip->fd, $timeout_ns);
     }
 
     public static function gpioChipReadInfoEvent(GPIOChip $chip): ?GPIOInfoEvent
     {
-        $buffer = System::read($chip->fd, 288);
+        $buffer = posix_read($chip->fd, 288);
         if (! is_string($buffer)) {
             return null;
         }

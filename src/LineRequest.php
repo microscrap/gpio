@@ -11,13 +11,12 @@ use Microscrap\Bindings\GPIO\DataObjects\GPIOV2LineConfig;
 use Microscrap\Bindings\GPIO\DataObjects\GPIOV2LineValues;
 use Microscrap\Bindings\GPIO\Enums\GPIOOpCode;
 use Microscrap\Bindings\GPIO\Enums\LineValue;
-use Posi\System;
 
 class LineRequest
 {
     public static function gpioLineRequestRelease(GPIOLineRequest $request): int
     {
-        return System::close($request->fd);
+        return posix_close($request->fd);
     }
 
     public static function gpioLineRequestGetFD(GPIOLineRequest $request): int
@@ -204,7 +203,7 @@ class LineRequest
 
     public static function gpioLineRequestWaitEdgeEvents(GPIOLineRequest $request, int $timeout_ns): ?int
     {
-        return System::ppoll($request->fd, $timeout_ns);
+        return posix_ppoll($request->fd, $timeout_ns);
     }
 
     public static function gpioLineRequestReadEdgeEvents(GPIOLineRequest $request, GPIOEdgeEventBuffer $buffer, int $max_events): int
@@ -221,7 +220,7 @@ class LineRequest
             return 0;
         }
 
-        $raw = System::read($request->fd, $to_read * 48);
+        $raw = posix_read($request->fd, $to_read * 48);
         if (! is_string($raw)) {
             return -1;
         }

@@ -1,7 +1,7 @@
 ---
 type: Architecture
-title: "Helpers → gpiod facades → posix/posi"
-description: "Global gpiod_* helpers call package facades (Chip, LineRequest, …); facades use posix_* / Posi\\System for FD and ioctl work."
+title: "Helpers → gpiod facades → posi"
+description: "Global gpiod_* helpers call package facades (Chip, LineRequest, …); facades call ext-posi global functions (posix_*, ioctl) for FD and ioctl work."
 resource: src/Helpers/gpio-chip.php
 tags: [architecture, bindings, gpio, helpers, gpiod, posi, posix]
 generated: { by: "okf-documentation-generator/cursor", at: "2026-08-10T22:04:45Z" }
@@ -15,10 +15,10 @@ sources:
     title: Helpers → LineRequest
   - id: chip
     resource: src/Chip.php
-    title: Chip facade uses posix_open / ioctl path
+    title: Chip facade uses posix_open / posix_ppoll / posix_read and ioctl path
   - id: line-request
     resource: src/LineRequest.php
-    title: LineRequest facade uses Posi\\System
+    title: LineRequest facade uses posix_close / posix_ppoll / posix_read
   - id: misc
     resource: src/Misc.php
     title: Misc facade for device check / api version
@@ -35,15 +35,14 @@ sources:
 
 # Call stack
 
-This package **does** have intermediate facade classes (like `microscrap/mpsse`, unlike thin `microscrap/posix`):[^readme][^helpers-chip][^chip]
+This package **does** have intermediate facade classes (like `microscrap/mpsse`, unlike the thin ext-posi function layer):[^readme][^helpers-chip][^chip]
 
 ```
 app / peers / tests
     │
     └─ gpiod_chip_open(...) / gpiod_line_request_set_value(...)   # global helpers (thin)
             └─► Microscrap\Bindings\GPIO\{Chip, LineRequest, LineSettings, …}
-                    ├─► posix_* helpers (microscrap/posix)
-                    └─► Posi\System::* (ext-posi) — close / ioctl / etc.
+                    └─► ext-posi global functions — posix_open / posix_close / posix_read / posix_ppoll / posix_lstat / ioctl
 ```
 
 Rules:[^agents][^readme]
@@ -53,7 +52,7 @@ Rules:[^agents][^readme]
 3. Do not invent parallel APIs that bypass facades into ad-hoc ioctl scripts from helpers.[^agents]
 4. DataObjects under `src/DataObjects/` hold state (FDs, configs, events); do not invent a second object model.[^readme]
 
-# Facade inventory (0.9.0)
+# Facade inventory (0.10.0)
 
 | Facade | Typical helpers | Role |
 |--------|-----------------|------|
@@ -86,7 +85,7 @@ Each function is wrapped in `if (! function_exists(...))` so a prior definition 
 - Chip / request state lives in DataObjects such as `GPIOChip`, `GPIOLineRequest`, `GPIOLineSettings`, `GPIOEdgeEventBuffer`.[^readme]
 - Prefer `is_null($var)` over `$var === null` in agent-authored code.[^agents]
 - C-style return codes (`null` / `-1` / `0`) — no ServiceProvider-thrown framework exceptions from this package.[^readme]
-- Example open path: `Chip::gpioChipOpen` verifies the device, then `posix_open` with `FileControlFlag::O_RDWR | O_CLOEXEC`.[^chip]
+- Example open path: `Chip::gpioChipOpen` verifies the device, then `posix_open` with the ext-posi constants `O_RDWR | O_CLOEXEC`.[^chip]
 
 # Related
 
@@ -97,8 +96,8 @@ Each function is wrapped in `if (! function_exists(...))` so a prior definition 
 
 [^helpers-chip]: Helper file with function_exists guards → Chip
 [^helpers-line-request]: Helpers → LineRequest
-[^chip]: Chip facade uses posix_open / ioctl path
-[^line-request]: LineRequest facade uses Posi\System
+[^chip]: Chip facade uses posix_open / posix_ppoll / posix_read and ioctl path
+[^line-request]: LineRequest facade uses posix_close / posix_ppoll / posix_read
 [^misc]: Misc facade for device check / api version
 [^composer]: Autoload files list for helpers
 [^readme]: Helpers delegate to facade classes

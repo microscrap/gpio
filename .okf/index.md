@@ -4,7 +4,7 @@ okf_version: "0.2"
 
 # microscrap/gpio Knowledge Bundle
 
-Package knowledge for `microscrap/gpio` (bindings-only libgpiod v2 / GPIO uAPI v2 helpers over **ext-posi** + `microscrap/posix`, v0.9.0).
+Package knowledge for `microscrap/gpio` (bindings-only libgpiod v2 / GPIO uAPI v2 helpers over **ext-posi**, v0.10.0).
 Read this index first; open only the concepts needed for the task.
 
 **Trust rule:** Prefer `status: stable`. Treat `deprecated` as historical only. New agent-written concepts stay `status: draft` until a human verifies them.
@@ -15,13 +15,13 @@ Read this index first; open only the concepts needed for the task.
 
 # Orientation
 
-* [Package (0.9)](orientation/package.md) - Composer identity, namespace, helpers over libgpiod / posi.
-* [Ecosystem docs](orientation/ecosystem-docs.md) - Published 0.9.x overview and docs site entrypoint.
-* [Pair with protocol peers](orientation/pairing-protocol-peers.md) - posix below; uart / i2c / spi beside; gpio-framework above.
+* [Package (0.10)](orientation/package.md) - Composer identity, namespace, helpers over libgpiod / posi.
+* [Ecosystem docs](orientation/ecosystem-docs.md) - Published 0.10.x overview and docs site entrypoint.
+* [Pair with protocol peers](orientation/pairing-protocol-peers.md) - ext-posi below; uart / i2c / spi beside; gpio-framework above.
 
 # Architecture
 
-* [Helpers → gpiod facades → posix/posi](architecture/helpers-gpiod-posi.md) - Call stack: `gpiod_*` helpers → facade classes → posix / Posi\System.
+* [Helpers → gpiod facades → posi](architecture/helpers-gpiod-posi.md) - Call stack: `gpiod_*` helpers → facade classes → ext-posi global functions.
 
 # Conventions
 

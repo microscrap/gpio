@@ -45,7 +45,7 @@ Under the guard, **whichever package’s autoload files run first keeps the defi
 
 # Related
 
-* [Helpers → gpiod facades → posix/posi](../architecture/helpers-gpiod-posi.md)
+* [Helpers → gpiod facades → posi](../architecture/helpers-gpiod-posi.md)
 * [1:1 libgpiod wrap](../conventions/one-to-one-libgpiod-wrap.md)
 
 [^readme]: README note on function_exists guards

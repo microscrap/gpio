@@ -38,7 +38,7 @@ Match the existing public surface; stay aligned with libgpiod v2 / GPIO uAPI v2 
 
 # Architecture link
 
-Full call-stack diagram: [Helpers → gpiod facades → posix/posi](../architecture/helpers-gpiod-posi.md).
+Full call-stack diagram: [Helpers → gpiod facades → posi](../architecture/helpers-gpiod-posi.md).
 
 [^agents]: Agent wrap rules
 [^readme]: Package README wrap description and helper API
