@@ -33,7 +33,7 @@ Separately, `GPIO_V2_GET_LINE` requests exclusive ownership of configured lines.
 
 # Mitigation
 
-- Confirm **ext-posi** `^0.10.0` is installed and the host kernel supports GPIO uAPI v2 (5.10+).[^readme]
+- Confirm **ext-posi** `^0.11.0` is installed and the host kernel supports GPIO uAPI v2 (5.10+).[^readme]
 - Ensure the PHP process can open `/dev/gpiochip*` (user in `gpio` group, udev `MODE`/`GROUP`, or appropriate container device mounts).
 - Use `gpiod_is_gpiochip_device($path)` / `gpiod_chip_get_line_info` to distinguish “not a chip” / “line busy” from other failures.[^readme]
 - Release requests with `gpiod_line_request_release` and chips with `gpiod_chip_close` so lines are not left claimed.[^readme]
@@ -42,7 +42,7 @@ Separately, `GPIO_V2_GET_LINE` requests exclusive ownership of configured lines.
 # Related
 
 * [Helpers → gpiod facades → posi](../architecture/helpers-gpiod-posi.md)
-* [Package (0.10)](../orientation/package.md)
+* [Package (0.11)](../orientation/package.md)
 
 [^readme]: Requirements, chip open, request_lines null-on-failure
 [^chip]: Chip open verifies device then posix_open

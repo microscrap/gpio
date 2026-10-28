@@ -62,7 +62,7 @@ Typed tokens for libgpiod-style line settings, event types, kernel ioctl opcodes
 - No class-level constants in `src/`.[^agents]
 - Pass enum instances (or `->value` where a raw `int` is required) into typed helper / facade APIs.[^readme]
 
-# Enum inventory (0.10.0)
+# Enum inventory (0.11.0)
 
 | Enum | Backing | Cases (summary) |
 |------|---------|-----------------|
@@ -82,7 +82,7 @@ Typed tokens for libgpiod-style line settings, event types, kernel ioctl opcodes
 # Related
 
 * [1:1 libgpiod wrap](one-to-one-libgpiod-wrap.md)
-* [Package (0.10)](../orientation/package.md)
+* [Package (0.11)](../orientation/package.md)
 * [Helpers → gpiod facades → posi](../architecture/helpers-gpiod-posi.md)
 
 [^readme]: Enum table and UPPERCASE note

@@ -27,17 +27,17 @@ sources:
 
 | Concern | Package |
 |---------|---------|
-| Native FD / syscall / ioctl | **ext-posi** `^0.10.0` (global `posix_*`, `ioctl`, `fcntl` functions; required) |
+| Native FD / syscall / ioctl | **ext-posi** `^0.11.0` (global `posix_*`, `ioctl`, `fcntl` functions; required) |
 | GPIO chip / line uAPI v2 | `microscrap/gpio` (this package) |
-| UART | `microscrap/uart` `^0.10` (sibling protocol) |
-| I2C | `microscrap/i2c` `^0.10` (sibling protocol) |
-| SPI | `microscrap/spi` `^0.10` (sibling protocol) |
+| UART | `microscrap/uart` `^0.11` (sibling protocol) |
+| I2C | `microscrap/i2c` `^0.11` (sibling protocol) |
+| SPI | `microscrap/spi` `^0.11` (sibling protocol) |
 | USB MPSSE / FTDI | `microscrap/ftdi` / `microscrap/mpsse` (beside — USB path, not a gpio child) |
-| Higher GPIO orchestration | `scrapyard-io/framework` `^0.10` (suggested; above this package)[^composer] |
+| Higher GPIO orchestration | `scrapyard-io/framework` `^0.11` (suggested; above this package)[^composer] |
 
 # Typical flow
 
-1. Depend on this package (requires **ext-posi** `^0.10.0`).[^composer]
+1. Depend on this package (requires **ext-posi** `^0.11.0`).[^composer]
 2. Open `/dev/gpiochipN`, configure lines, request ownership, read/write / edge-wait via `gpiod_*` helpers.[^readme][^chip]
 3. Application / `gpio-framework` composes this peer — do not invent framework providers inside this package.[^agents]
 
@@ -48,7 +48,7 @@ sources:
 
 # Related
 
-* [Package (0.10)](package.md)
+* [Package (0.11)](package.md)
 * [Helpers → gpiod facades → posi](../architecture/helpers-gpiod-posi.md)
 
 [^composer]: Require ext-posi; suggest gpio-framework

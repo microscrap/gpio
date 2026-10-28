@@ -1,3 +1,7 @@
+## 2026-10-28
+
+* **Version**: 0.11.0 with the Venusian 0.11 ecosystem: `version` 0.11.0, `dev-main` → `0.11.x-dev`, `ext-posi` `^0.11.0`, PHP `~8.4.27||^8.5.12`, docs URLs `0.11.x`, `scrapyard-io/framework` `^0.11.0`. `gpioMiscAPIVersion()` returns 0.11.0. README, AGENTS and the bundle relabelled; CI installs `posi` `^0.11` where it has a workflow. No API change. 5 passed on Homebrew PHP 8.4 NTS and ZTS and on the Pi (8.4 ZTS).
+
 ## 2026-10-03
 * **Update**: 0.10.0 port. ext-posi 0.10 is a C rewrite exposing global functions; `Posi\System` is gone and `microscrap/posix` is absorbed. `Chip` and `LineRequest` call `posix_open` / `posix_close` / `posix_read` / `posix_ppoll` directly; chips open with `O_RDWR | O_CLOEXEC` constants. Requires only `ext-posi` `^0.10.0`, version 0.10.0, branch alias `0.10.x-dev`, suggest `scrapyard-io/framework` `^0.10.0`, docs URLs `0.10.x`. README, AGENTS, [Package (0.10)](/orientation/package.md), [Ecosystem docs](/orientation/ecosystem-docs.md), [Pair with protocol peers](/orientation/pairing-protocol-peers.md), [Enums for gpiod](/conventions/enums-gpiod.md), [Helpers → gpiod facades → posi](/architecture/helpers-gpiod-posi.md) relabelled. Package enums unchanged. No public helper change.
 
